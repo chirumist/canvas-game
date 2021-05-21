@@ -1,7 +1,7 @@
 # canvas-game
-
+45:40
 - Create Player (Done)
-- Shoot projectile
+- Shoot projectile (Done)
 - Create Enemies
 - Detect collision on enemy / projectile hit
 - Detect collision on enemy / player hit
