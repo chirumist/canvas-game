@@ -8,6 +8,9 @@ const c = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
+let enemyHelth = 5
+let projectTileSpeed = 5
+
 const playerWidth = canvas.width / 2
 const playerHeight = canvas.height / 2
 
@@ -87,12 +90,21 @@ const main = () => {
             // Distance between enemy and projecttile
             const projectHit = Math.hypot(pTile.x - enemy.x, pTile.y - enemy.y)
 
+            // When projecttile touch enemy
             if (projectHit - enemy.radius - pTile.radius < 1) {
-                // Enemy hits
-                setTimeout(() => {
-                    enemies.splice(enmIndex, 1)
-                    projectTiles.splice(pTileIndex, 1)
-                }, 0);
+                if (enemy.radius - enemyHelth > 10) {
+                    gsap.to(enemy, {
+                        radius: enemy.radius - enemyHelth
+                    })
+                    setTimeout(() => {
+                        projectTiles.splice(pTileIndex, 1)
+                    }, 0);
+                } else {
+                    setTimeout(() => {
+                        enemies.splice(enmIndex, 1)
+                        projectTiles.splice(pTileIndex, 1)
+                    }, 0);
+                }
             }
         })
     })
@@ -106,8 +118,8 @@ window.addEventListener('click', (e) => {
     // Create angle for projecttile distance
     const angle = Math.atan2(e.clientX - width,e.clientY - height)
     const velocity = {
-        x: Math.sin(angle) * 6,
-        y: Math.cos(angle) * 6
+        x: Math.sin(angle) * projectTileSpeed,
+        y: Math.cos(angle) * projectTileSpeed
     }
     // New projecttile
     const projectile = new Projectile(c ,width, height, 5, 'white', velocity )

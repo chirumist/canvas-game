@@ -8,7 +8,7 @@ Demo Line: https://chirumist.github.io/canvas-game/
 - Detect collision on enemy / player hit (Done)
 - Remove Offscreen Project tile (Done)
 - Colorize game (done)
-- Shrink enemy on hit
+- Shrink enemy on hit (done)
 - Create partical explosion on hit
 - Add Score
 - Add Game Ui
