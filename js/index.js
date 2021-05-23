@@ -5,9 +5,12 @@ import Partical from './partical.js'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
+const score = document.getElementById('score')
 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
+
+let currentScore = 0
 
 let enemyHelth = 10
 let projectTileSpeed = 5
@@ -52,6 +55,7 @@ const random = () => {
 let animateId
 const main = () => {
     animateId = window.requestAnimationFrame(main)
+    score.innerText = currentScore
     c.fillStyle = 'rgba(0,0,0, .1)'
     c.fillRect(0,0,canvas.width, canvas.height)
     // Spawn Player
@@ -125,11 +129,16 @@ const main = () => {
                     })
                     setTimeout(() => {
                         projectTiles.splice(pTileIndex, 1)
+                        // Increase current score
+                        currentScore += 1
                     }, 0);
                 } else {
                     setTimeout(() => {
                         enemies.splice(enmIndex, 1)
                         projectTiles.splice(pTileIndex, 1)
+
+                        // Increase current score
+                        currentScore += 2
                     }, 0);
                 }
             }

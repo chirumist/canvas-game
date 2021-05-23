@@ -11,7 +11,7 @@ Todo List
 - Colorize game (done)
 - Shrink enemy on hit (done)
 - Create partical explosion on hit (done)
-- Add Score
+- Add Score (done)
 - Add Game Ui
 - Add restart button
 - Add Start Button
