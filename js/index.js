@@ -113,7 +113,6 @@ const main = () => {
         if (enemyHits - enemy.radius - player.radius < 1) {
             window.cancelAnimationFrame(animateId)
             window.clearInterval(enemyIntervel)
-            resetGame()
             modal.style.display = 'block'
         }
         // Touch enemy
@@ -186,6 +185,7 @@ window.addEventListener('resize', () => {
 
 startButton.addEventListener('click', (e) => {
     modal.style.display = 'none'
+    resetGame()
     main()
     spawnEnemy()
  })
