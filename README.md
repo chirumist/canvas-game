@@ -1,4 +1,5 @@
 # canvas-game
+Demo Line: https://chirumist.github.io/canvas-game/
 45:40
 - Create Player (Done)
 - Shoot projectile (Done)
