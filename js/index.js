@@ -1,6 +1,7 @@
 import Player from './player.js'
 import Enemy from './enemy.js'
 import Projectile from './projectile.js'
+import Partical from './partical.js'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -8,14 +9,14 @@ const c = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
-let enemyHelth = 5
+let enemyHelth = 10
 let projectTileSpeed = 5
 
 const playerWidth = canvas.width / 2
 const playerHeight = canvas.height / 2
 
 const player = new Player(c, playerWidth, playerHeight, 10, 'white')
-
+const particals = []
 const projectTiles = []
 // New Enemy
 const enemies = []
@@ -58,6 +59,17 @@ const main = () => {
     player.y = window.innerHeight / 2
     player.draw()
 
+    // Create particals
+    particals.forEach((partical, particalIndex) => {
+        if (partical.alpha <= 0) {
+            setTimeout(() => {
+                particals.splice(particalIndex, 1)
+            }, 0);
+        } else {
+            partical.update()
+        }
+    })
+
     // Spawn Projectile
     projectTiles.forEach((pTile, pTileIndex) => {
         pTile.update()
@@ -92,7 +104,22 @@ const main = () => {
 
             // When projecttile touch enemy
             if (projectHit - enemy.radius - pTile.radius < 1) {
-                if (enemy.radius - enemyHelth > 10) {
+
+                // create exploions effect
+                for (let i = 0; i < enemy.radius * 2; i++) {
+                    particals.push(
+                        new Partical( c, 
+                            pTile.x, pTile.y, 
+                            random() * 2, 
+                            enemy.color, 
+                            {
+                                x: (random() - .5) * (random() * 6),
+                                y: (random() - .5) * (random() * 6)
+                            }
+                        )
+                    )
+                }
+                if (enemy.radius - enemyHelth > 5) {
                     gsap.to(enemy, {
                         radius: enemy.radius - enemyHelth
                     })
