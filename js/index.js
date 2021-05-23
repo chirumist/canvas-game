@@ -11,7 +11,7 @@ canvas.height = window.innerHeight
 const playerWidth = canvas.width / 2
 const playerHeight = canvas.height / 2
 
-const player = new Player(c, playerWidth, playerHeight, 30, 'blue')
+const player = new Player(c, playerWidth, playerHeight, 10, 'white')
 
 const projectTiles = []
 // New Enemy
@@ -29,7 +29,7 @@ const spawnEnemy = () => {
             x = random() * canvas.width
             y = random() < 0.5 ? 0 - radius : canvas.height + radius
         }
-        const color = 'green'
+        const color = `hsl(${Math.floor(Math.random() * 360)},50%, 50%)`
         const angle = Math.atan2(canvas.width / 2 - x ,canvas.height / 2 - y)
         const velocity = {
             x: Math.sin(angle),
@@ -48,7 +48,8 @@ const random = () => {
 let animateId
 const main = () => {
     animateId = window.requestAnimationFrame(main)
-    c.clearRect(0,0,canvas.width, canvas.height)
+    c.fillStyle = 'rgba(0,0,0, .1)'
+    c.fillRect(0,0,canvas.width, canvas.height)
     // Spawn Player
     player.x = window.innerWidth / 2
     player.y = window.innerHeight / 2
@@ -105,11 +106,11 @@ window.addEventListener('click', (e) => {
     // Create angle for projecttile distance
     const angle = Math.atan2(e.clientX - width,e.clientY - height)
     const velocity = {
-        x: Math.sin(angle),
-        y: Math.cos(angle)
+        x: Math.sin(angle) * 6,
+        y: Math.cos(angle) * 6
     }
     // New projecttile
-    const projectile = new Projectile(c ,width, height, 5, 'red', velocity )
+    const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
     projectTiles.push(projectile)
 })
 
