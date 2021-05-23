@@ -5,7 +5,9 @@ import Partical from './partical.js'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
-const score = document.getElementById('score')
+const scores = document.querySelectorAll('.score')
+const modal = document.querySelector('.modal')
+const startButton = document.querySelector('#restart-game')
 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
@@ -21,11 +23,19 @@ const playerHeight = canvas.height / 2
 const player = new Player(c, playerWidth, playerHeight, 10, 'white')
 const particals = []
 const projectTiles = []
-// New Enemy
 const enemies = []
+
+function resetGame () {
+    particals.length = 0
+    enemies.length = 0
+    projectTiles.length = 0
+    currentScore = 0
+}
+// New Enemy
+let enemyIntervel
 let enemySpawnSpeed = 2000
 const spawnEnemy = () => {
-    setInterval(() => {
+    enemyIntervel = setInterval(() => {
         const radius = random() * (30 - 5) + 5
         let x
         let y
@@ -55,7 +65,9 @@ const random = () => {
 let animateId
 const main = () => {
     animateId = window.requestAnimationFrame(main)
-    score.innerText = currentScore
+    Array.from(scores, (elem) => {
+        elem.innerText = currentScore
+    })
     c.fillStyle = 'rgba(0,0,0, .1)'
     c.fillRect(0,0,canvas.width, canvas.height)
     // Spawn Player
@@ -100,6 +112,9 @@ const main = () => {
         // Game Over
         if (enemyHits - enemy.radius - player.radius < 1) {
             window.cancelAnimationFrame(animateId)
+            window.clearInterval(enemyIntervel)
+            resetGame()
+            modal.style.display = 'block'
         }
         // Touch enemy
         projectTiles.forEach((pTile, pTileIndex) => {
@@ -159,7 +174,9 @@ window.addEventListener('click', (e) => {
     }
     // New projecttile
     const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
-    projectTiles.push(projectile)
+    if (modal.style.display === 'none') {
+        projectTiles.push(projectile)
+    }
 })
 
 window.addEventListener('resize', () => {
@@ -167,5 +184,8 @@ window.addEventListener('resize', () => {
     canvas.height = window.innerHeight  
 })
 
-main()
-spawnEnemy()
+startButton.addEventListener('click', (e) => {
+    modal.style.display = 'none'
+    main()
+    spawnEnemy()
+ })

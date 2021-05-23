@@ -12,6 +12,11 @@ Todo List
 - Shrink enemy on hit (done)
 - Create partical explosion on hit (done)
 - Add Score (done)
-- Add Game Ui
-- Add restart button
-- Add Start Button
+- Add Game Ui (done)
+- Add restart button (done)
+- Add Start Button (done)
+- Add Music
+- Add HighScore
+- Add Level
+- Update Level based enemy health and score
+- Pause Button

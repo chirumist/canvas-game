@@ -1,15 +1,47 @@
-* {
-    box-sizing: border-box;
-}
-body{
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-}
+/* Reset Css */
 ::selection {background: transparent;}
-.score-pannel {
-    position: fixed;
-    padding: 10px;
+* { box-sizing: border-box;margin: 0; padding: 0; }
+body{ overflow: hidden; font-family: Arial, Helvetica, sans-serif; background: #000;}
+h1 {font-size: 3.5rem;}
+h2 {font-size: 3rem;}
+h3 {font-size: 2.5rem;}
+h4 {font-size: 2rem;}
+h5 {font-size: 1.5rem;}
+h6 {font-size: 1rem;}
+p{margin-bottom: 1rem;}
+
+/* Button */
+.btn{
+    border: 0;
+    outline: none;
+    background: #eeeeee;
+    border: 1px solid #eeeeee;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1.125rem;
 }
+.btn-rounded {border-radius: 50rem;}
+.btn-primary{background: hsl(210, 80%, 50%);border-color: hsl(210, 80%, 50%); color: #fff; transition: all 400ms ease-in-out;}
+.btn-primary:hover {background: hsl(210, 80%, 45%);border-color: hsl(210, 80%, 45%);}
+.btn-block {width: 100%;}
+/* Scores */
+.score-pannel { position: fixed; padding: 10px;}
 .score-pannel span {color: #fff}
+
+/* Modal */
+.modal {
+    background: #fff;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    z-index: 10;
+    left: calc(100vw - 60vw);
+    top: calc(100vh - 70vh);
+}
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+}
