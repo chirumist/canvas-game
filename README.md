@@ -15,8 +15,15 @@ Todo List
 - Add Game Ui (done)
 - Add restart button (done)
 - Add Start Button (done)
-- Add Music
+- Hints for first time play
+- Add Music and Fsx
 - Add HighScore
 - Add Level
 - Update Level based enemy health and score
-- Pause Button
+- Pause Game
+- Power up projectile or same as machine gun
+- Power for clean enemy
+- Move player
+- Interactive background on move player
+- Diffrent enemy movement
+- Mobile Responsive and touch event
