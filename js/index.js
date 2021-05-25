@@ -125,7 +125,12 @@ const main = () => {
 
             // When projecttile touch enemy
             if (projectHit - enemy.radius - pTile.radius < 1) {
-
+                // if(currentScore % 10) {
+                //     isMultipleProjectileOnMove = true
+                //     setTimeout(() => {
+                //         isMultipleProjectileOnMove = false
+                //     }, 1000);
+                // }
                 // create exploions effect
                 for (let i = 0; i < enemy.radius * 2; i++) {
                     particals.push(
@@ -177,17 +182,26 @@ function shootProjectile(e) {
     }
     // New projecttile
     if (modal.style.display === 'none') {
-        const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
-        projectTiles.push(projectile)
-        if(isMultipleProjectile) {
-            machineGun = setInterval(() => {
-                const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
-                projectTiles.push(projectile)
-            }, 300);
+        if(!isMultipleProjectileOnMove) {
+            const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
+            projectTiles.push(projectile)
+            if(isMultipleProjectile) {
+                machineGun = setInterval(() => {
+                    const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
+                    projectTiles.push(projectile)
+                }, 300);
+            }
+        } else {
+            const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
+            projectTiles.push(projectile)
         }
     }
 }
-console.log(window.MediaDevices)
+function isTouchDevice() {
+    return (('ontouchstart' in window) ||
+       (navigator.maxTouchPoints > 0) ||
+       (navigator.msMaxTouchPoints > 0));
+  }
 window.addEventListener("mousedown", function(e){
     if (e.button == 0) {
         shootProjectile(e)
