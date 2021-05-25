@@ -208,6 +208,7 @@ window.addEventListener("touchmove", function(e) {
 })
 
 window.addEventListener('touchstart',(e) => {
+    alert('hayy ')
     shootProjectile(e)
 });
 
