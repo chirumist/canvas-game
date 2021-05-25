@@ -165,7 +165,7 @@ const main = () => {
 
 let machineGun
 
-function shootProjectile() {
+function shootProjectile(e) {
     const width = canvas.width / 2
     const height = canvas.height / 2
 
