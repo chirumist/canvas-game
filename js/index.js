@@ -179,7 +179,7 @@ function shootProjectile(e) {
     if (modal.style.display === 'none') {
         const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
         projectTiles.push(projectile)
-        if(isMultipleProjectile || isMultipleProjectileOnMove) {
+        if(isMultipleProjectile) {
             machineGun = setInterval(() => {
                 const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
                 projectTiles.push(projectile)
@@ -192,7 +192,9 @@ window.addEventListener("mousedown", function(e){
 })
 
 window.addEventListener("mousemove", function(e){
-    shootProjectile(e)
+    if(isMultipleProjectileOnMove) {
+        shootProjectile(e)
+    }
 })
 
 window.addEventListener("mouseup", function(e){
@@ -200,7 +202,9 @@ window.addEventListener("mouseup", function(e){
 })
 
 window.addEventListener("touchmove", function(e) {
-    shootProjectile(e)
+    if(isMultipleProjectileOnMove) {
+        shootProjectile(e)
+    }
 })
 
 window.addEventListener('touchstart',(e) => {
