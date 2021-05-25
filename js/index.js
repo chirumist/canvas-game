@@ -183,12 +183,15 @@ function shootProjectile(e) {
             machineGun = setInterval(() => {
                 const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
                 projectTiles.push(projectile)
-            }, 100);
+            }, 300);
         }
     }
 }
+console.log(window.MediaDevices)
 window.addEventListener("mousedown", function(e){
-    shootProjectile(e)
+    if (e.button == 0) {
+        shootProjectile(e)
+    }
 })
 
 window.addEventListener("mousemove", function(e){
@@ -208,7 +211,6 @@ window.addEventListener("touchmove", function(e) {
 })
 
 window.addEventListener('touchstart',(e) => {
-    alert('hayy ')
     shootProjectile(e)
 });
 
