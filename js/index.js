@@ -25,6 +25,9 @@ const particals = []
 const projectTiles = []
 const enemies = []
 
+let isMultipleProjectile = true
+let isMultipleProjectileOnMove = false
+
 function resetGame () {
     particals.length = 0
     enemies.length = 0
@@ -160,8 +163,9 @@ const main = () => {
     })
 }
 
+let machineGun
 
-window.addEventListener('click', (e) => {
+function shootProjectile() {
     const width = canvas.width / 2
     const height = canvas.height / 2
 
@@ -172,11 +176,40 @@ window.addEventListener('click', (e) => {
         y: Math.cos(angle) * projectTileSpeed
     }
     // New projecttile
-    const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
     if (modal.style.display === 'none') {
+        const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
         projectTiles.push(projectile)
+        if(isMultipleProjectile || isMultipleProjectileOnMove) {
+            machineGun = setInterval(() => {
+                const projectile = new Projectile(c ,width, height, 5, 'white', velocity )
+                projectTiles.push(projectile)
+            }, 100);
+        }
     }
+}
+window.addEventListener("mousedown", function(e){
+    shootProjectile(e)
 })
+
+window.addEventListener("mousemove", function(e){
+    shootProjectile(e)
+})
+
+window.addEventListener("mouseup", function(e){
+    clearInterval(machineGun)
+})
+
+window.addEventListener("touchmove", function(e) {
+    shootProjectile(e)
+})
+
+window.addEventListener('touchstart',(e) => {
+    shootProjectile(e)
+});
+
+window.addEventListener('touchend',(e) => {
+    clearInterval(machineGun)
+});
 
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth
